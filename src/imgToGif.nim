@@ -23,7 +23,8 @@ const helpFlagInfo = """
     --loop        |   does the gif loop or does it just run through once, true or false 
     --loopCount   |   how many times you want the gof to loop, this is only valid if loop = true
     --outName     |   The name of the output gif, do not add the '.gif' extension onto it
-   
+  <-- EXAMPLE ->
+    imgToGif sprites/ --loop:true --loopCount:10 --outName:spriteAnimation 
   """
 
 const extension: string = ".gif"
@@ -71,6 +72,9 @@ proc main() =
   # some default initalization, these options will be over written in the param parsing or info getting
   info.loop = false; info.loop_count = 1; info.output_name = $now()
   echo greeting_thing & "\n"
+  if commandLineParams()[0] == "--help":
+    echo helpFlagInfo
+    quit()
   if commandLineParams().len == 0:
     echo "No params passed in...getting info"
     getInfoRaw(info)
@@ -79,6 +83,7 @@ proc main() =
   images = getImgs(info.album_path)
   var gif = newGif(info.output_name & extension, 128,128, fps = 24)
   var loopIteration: int = 0
+
   while true:
     for n in images: 
       gif.write(n.data) # write image data to the gif 
@@ -88,7 +93,10 @@ proc main() =
       break
     elif info.loop_count == loopIteration:
       break
+    
+    # close the gif
   gif.close()
+  echo "...Done..."
 
   
 
