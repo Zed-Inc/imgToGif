@@ -64,7 +64,7 @@ proc splitTgaToPng*(imagepath: string) =
 #------------>
 
 echo "The following questions assume that each seperate image you want to split is an even square, not a rectangle"
-echo "If you are unsure if your images are squars press ctrl/cmd + c to exit"
+echo "If you are unsure if your image can be seperated into squares press ctrl/cmd + c to exit"
 
 # get image file path
 stdout.write("enter file path: ")

@@ -1,3 +1,6 @@
 
 src/splitTga
 imgToGif
+*.tga
+*.png
+*.png
