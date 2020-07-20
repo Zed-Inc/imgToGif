@@ -72,15 +72,18 @@ proc main() =
   # some default initalization, these options will be over written in the param parsing or info getting
   info.loop = false; info.loop_count = 1; info.output_name = $now()
   echo greeting_thing & "\n"
-  if commandLineParams()[0] == "--help":
-    echo helpFlagInfo
-    quit()
+
   if commandLineParams().len == 0:
     echo "No params passed in...getting info"
     getInfoRaw(info)
+  elif commandLineParams()[0] == "--help":
+    echo helpFlagInfo
+    quit()
   else:
     parseParams(info, commandLineParams())
+
   images = getImgs(info.album_path)
+
   var gif = newGif(info.output_name & extension, 128,128, fps = 24)
   var loopIteration: int = 0
 
@@ -139,11 +142,21 @@ proc parseParams(gif: var GifInfo, params: seq[string]) =
 # load all the images from the folder into a sequence
 proc getImgs(path: string): seq[Image] =
   var imgNames: seq[string]
+  echo "getting images"
+  # svae our current directory
+  var currDir = os.getCurrentDir()
+  # shift to the fdirectory storing our images
+  os.setCurrentDir(path)
   for img in walkFiles("*.png"):
+    echo img # DEBUG 
     imgNames.add(img)
-  
+    
+  echo "loading images" # DEBUG
   # load in the images
   for img in imgNames:
     result.add(loadImage(path & img))
+
+  # go back to our original directory
+  os.setCurrentDir(currDir)
 
 

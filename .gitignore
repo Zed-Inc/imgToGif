@@ -4,3 +4,5 @@ imgToGif
 *.tga
 *.png
 *.png
+src/.DS_Store
+src/splitImage

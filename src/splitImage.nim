@@ -10,10 +10,10 @@ import os as os
   in movement/ action
 ]#
 
-proc splitTgaToPng*(imagepath: string) =
+proc splitToPngs*(imagepath: string) =
 
 
-  var mainImage: Image = flippy.loadImage(imagepath) 
+  var mainImage: Image = loadImage(imagepath) 
   echo "image loaded"
  
   var w,h :int
@@ -69,4 +69,4 @@ echo "If you are unsure if your image can be seperated into squares press ctrl/c
 # get image file path
 stdout.write("enter file path: ")
 var path = stdin.readLine()
-splitTgaToPng(path)
+splitToPngs(path)
