@@ -80,7 +80,7 @@ proc main() =
   var gif = newGif(info.output_name & extension, 128,128, fps = 24)
   var loopIteration: int = 0
   while true:
-    for n in images:
+    for n in images: 
       gif.write(n.data) # write image data to the gif 
     loopIteration.inc()
     # check if the gif should be looping and that the loop iteration is correct
