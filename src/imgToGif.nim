@@ -141,22 +141,21 @@ proc parseParams(gif: var GifInfo, params: seq[string]) =
 
 # load all the images from the folder into a sequence
 proc getImgs(path: string): seq[Image] =
-  var imgNames: seq[string]
   echo "getting images"
   # svae our current directory
-  var currDir = os.getCurrentDir()
-  # shift to the fdirectory storing our images
+  var ogDir = os.getCurrentDir()
+  # shift to the directory storing our images
   os.setCurrentDir(path)
+  # echo os.getCurrentDir() 
+  var imgPath = ""
   for img in walkFiles("*.png"):
-    echo img # DEBUG 
-    imgNames.add(img)
-    
-  echo "loading images" # DEBUG
-  # load in the images
-  for img in imgNames:
-    result.add(loadImage(path & img))
+    imgPath = os.getCurrentDir() & "/" & img
+    result.add(loadImage(imgPath))
+    echo "loaded " & img
+
+  echo "...images loaded"
 
   # go back to our original directory
-  os.setCurrentDir(currDir)
+  os.setCurrentDir(ogDir)
 
 

@@ -6,3 +6,4 @@ imgToGif
 *.png
 src/.DS_Store
 src/splitImage
+.DS_Store

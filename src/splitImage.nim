@@ -26,9 +26,11 @@ proc splitToPngs*(imagepath: string) =
   except ValueError:
     echo "Error, input was not a number"
     quit()
+  
+  
 
   var numImages = w*h
-  echo "Number of seperate images: " & $numImages
+  
 
   w = mainImage.width div w # get the width of a single image and reassign to w
   h = mainImage.height div h # get the height of a single image and reassign to h
@@ -41,15 +43,21 @@ proc splitToPngs*(imagepath: string) =
     x = 0
     y = 0
     
-  # move along the image splitting it up into smaller images
+  echo "w: " & $w  & ", h: " & $h
+  echo "image width: " & $mainImage.width  & ", image height: " & $mainImage.height 
+  echo "Number of seperate images: " & $numImages
+
   for n in 0..<numImages:
     littleImage.add(getSubImage(mainImage,x,y,w,h))
     x += w
     if x >= mainImage.width:
       x = 0
-      y += h
+      y = y + h
+      echo "x reached end" # DEBUG
     if y >= mainImage.height:
       y = mainImage.height - h
+      echo "y reached end" # DEBUG
+    echo "x: " & $x  & ", y: " & $y
 
   # save the images 
   os.createDir("splitImages")

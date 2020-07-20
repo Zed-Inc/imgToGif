@@ -13,4 +13,4 @@ bin           = @["imgToGif"]
 
 requires "nim >= 1.2.2",
          "https://github.com/rxi/gifwriter",
-         "flippy >= 0.4.5"
+         "flippy == 0.4.5"
